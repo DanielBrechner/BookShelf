@@ -14,16 +14,16 @@ body {
 
 }
 
-#search-results{
-    background-color: blue;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1em;
-    
-}
+
 .card{
     background-color: rgb(223, 220, 220);
     padding:5%;
     margin: 5px;
     border-radius: 10px;
     opacity: 90%;
+}
+.html-results{
+    display: grid;
+    gap: 1em;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}

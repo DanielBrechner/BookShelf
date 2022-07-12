@@ -14,7 +14,7 @@ inputSearch.addEventListener("keyup", function (e) {
 
 function fetchAPI() {
   const searchPhrase = inputSearch.value;
-  const apiKey = "AIzaSyB8fcAyf3t4-OA-UVRQr5lI5pDcecw9vT4";
+  const apiKey = "";
 
   fetch(
     `https://www.googleapis.com/books/v1/volumes?q=${searchPhrase}&maxResults=10&key=${apiKey}`
