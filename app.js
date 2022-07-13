@@ -3,6 +3,7 @@
 const btnSearch = document.querySelector("#btn-search");
 const inputSearch = document.querySelector("#input-search");
 const divResults = document.querySelector("#search-results");
+const saveBooks = [];
 
 btnSearch.addEventListener("click", fetchAPI);
 
@@ -12,9 +13,22 @@ inputSearch.addEventListener("keyup", function (e) {
   }
 });
 
+function addBookToList(isbn) {
+  let isBookAdded = false;
+  saveBooks.forEach((bookIsbn) => {
+    if (bookIsbn === isbn) {
+      isBookAdded = true;
+    }
+  });
+  if (!isBookAdded) {
+    saveBooks.push(isbn);
+  }
+  console.log(saveBooks);
+}
+
 function fetchAPI() {
   const searchPhrase = inputSearch.value;
-  const apiKey = "";
+  const apiKey = "AIzaSyB8fcAyf3t4-OA-UVRQr5lI5pDcecw9vT4";
 
   fetch(
     `https://www.googleapis.com/books/v1/volumes?q=${searchPhrase}&maxResults=10&key=${apiKey}`
@@ -25,6 +39,7 @@ function fetchAPI() {
       let resultHtml = ``;
 
       books.forEach((book) => {
+        console.log(book);
         const bookInfo = book.volumeInfo;
 
         // books info displayed on the search page
@@ -32,14 +47,15 @@ function fetchAPI() {
           ? bookInfo.imageLinks.smallThumbnail
           : "/";
         const title = bookInfo.title;
-        const subtitle = bookInfo.subtitle ? bookInfo.subtitle : "";
+        const author = bookInfo.authors;
+        // const subtitle = bookInfo.subtitle ? bookInfo.subtitle : "";
         const description = bookInfo.description
           ? cutDescription(bookInfo.description)
           : "Description not found...";
         const link = bookInfo.infoLink;
 
         // add a book card to the html markup
-        resultHtml += showBook(image, title, subtitle, description, link);
+        resultHtml += showBook(image, title, author, description, link);
       });
 
       // display created html markup
@@ -47,15 +63,18 @@ function fetchAPI() {
     });
 }
 
-function showBook(image, title, subtitle, description, link) {
+function showBook(image, title, author, description, link) {
   return `
         <div class="card" style="width: 17rem;">
             <img src="${image}" class="card-img" alt="book cover">
             <div class="card-body">
                 <h5 class="card-title">${title}</h5>
-                <h6 class="card-title">${subtitle}</h6>
+                <h6 class="card-author">by ${author}</h6>
                 <p class="card-text">${description}</p>
                 <a href="${link}" class="btn btn-primary">More info...</a>
+                <br>
+                <br>
+                <button onclick='addBookToList("${title}")'> Add to bookshelf </button>
             </div>
         </div>`;
 }
@@ -63,3 +82,13 @@ function showBook(image, title, subtitle, description, link) {
 function cutDescription(description) {
   return description.slice(0, 100).concat("", "...");
 }
+// eventz
+document.getElementById("search-results").addEventListener("click", () => {
+  console.log("event clicked for search results!!");
+});
+
+let searchResults = document.getElementById("search-results");
+searchResults.onclick = () => {
+  console.log("search button pressed");
+  document.getElementById("myBookshelf").innerHTML += `hello`;
+};

@@ -5,21 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lora|Roboto:400,700" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lato:ital,wght@0,700;1,100;1,300&display=swap" rel="stylesheet">
+
     <title>BookShelf</title>
 
 </head>
 
 <body>
-        <nav class="navbar navbar-dark bg-primary">
-            <div class="container-fluid">
-                <span class="navbar-brand mb-0 h1">Find books here</span>
-            </div>
-    
-        </nav>
+    <div class="wrapper">
+    <header id="header">
+        <h1 class="title">My Bookshelf</h1>
+    </header>
+
+    <div id="myBookshelf">
+
+    </div>
     
         <div class="container">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control"
+            <div id="input-group">
+                <input type="text" class="form"
                     aria-label="Search Input"
                     aria-describedby="btn-search" id="input-search">
                 <button class="btn" type="button" id="btn-search">Search</button>
@@ -29,9 +36,10 @@
         <div class="container">
             <div id="search-results"></div>
         </div>
-</body>
+    </div>
+
     
 
 <script src="app.js"></script>
-
+</body>
 </html>
