@@ -13,15 +13,15 @@ inputSearch.addEventListener("keyup", function (e) {
   }
 });
 
-function addBookToList(isbn) {
+function addBookToList(title) {
   let isBookAdded = false;
-  saveBooks.forEach((bookIsbn) => {
-    if (bookIsbn === isbn) {
+  saveBooks.forEach((bookTitle) => {
+    if (bookTitle === title) {
       isBookAdded = true;
     }
   });
   if (!isBookAdded) {
-    saveBooks.push(isbn);
+    saveBooks.push(title);
   }
   console.log(saveBooks);
 }
@@ -38,6 +38,7 @@ function fetchAPI() {
     .then((books) => {
       let resultHtml = ``;
 
+      console.log(books);
       books.forEach((book) => {
         console.log(book);
         const bookInfo = book.volumeInfo;
@@ -83,12 +84,12 @@ function cutDescription(description) {
   return description.slice(0, 100).concat("", "...");
 }
 // eventz
-document.getElementById("search-results").addEventListener("click", () => {
-  console.log("event clicked for search results!!");
-});
+// document.getElementById("search-results").addEventListener("click", () => {
+//   console.log("event clicked for search results!!");
+// });
 
 let searchResults = document.getElementById("search-results");
 searchResults.onclick = () => {
   console.log("search button pressed");
-  document.getElementById("myBookshelf").innerHTML += `hello`;
+  document.getElementById("myBookshelf").innerHTML += saveBooks;
 };
