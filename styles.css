@@ -7,35 +7,40 @@ html,
 body {
  
     height: 100%;
-    margin: 5;
+    margin: 5px;
     font-family: 'Lora', serif;
     background-color: #f4f4f6;
-    background-image: url("images/alfons-morales-YLSwjSy7stw-unsplash.jpg");
+    /* background-image: url("images/alfons-morales-YLSwjSy7stw-unsplash.jpg"); */
 
 }
-
+#header{
+    background-color: #ffc176;
+}
 .title{
     /* font-family: 'Lato', sans-serif; */
-    font-family: 'Abril Fatface';
-
-    color:azure;
+   
+    color:#85887f;
     letter-spacing: 10px;
     font-size: 4em;
     display: flex;
     justify-content: center;
+    padding:5px;
 }
-#myBookshelf{
-    background-color: aliceblue;
-    height: 200px;
-    opacity: 90%;
-}
-#myBookshelf > h2{
+h2{
+   
+    color:#85887f;
+    letter-spacing: 5px;
+    font-size: 2em;
     display: flex;
     justify-content: center;
-    padding: 2px;
-    font-family: 'Lora', serif;
-
+    padding:5px;
 }
+#myBookshelf{
+    background-color:#ffdc74;
+    height: 200px;
+   
+}
+
 #input-group{
     display: flex;
     justify-content: center;
@@ -57,7 +62,7 @@ body {
 
 
 .card{
-    background-color: rgb(223, 220, 220);
+    background-color:#d7dace;
     padding:5%;
     margin: 5px;
     border-radius: 10px;
@@ -68,4 +73,9 @@ body {
     gap: 1em;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     
+}
+.container{
+    background-color:#ffe9b3;
+    padding: 5%;
+    margin: 5px;
 }
