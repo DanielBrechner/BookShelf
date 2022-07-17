@@ -7,37 +7,42 @@ html,
 body {
  
     height: 100%;
-    margin: 5px;
+    /* margin: 5px; */
     font-family: 'Lora', serif;
-    background-color: #f4f4f6;
-    /* background-image: url("images/alfons-morales-YLSwjSy7stw-unsplash.jpg"); */
+  
+    background-color: white;
+  
 
 }
 #header{
-    background-color: #ffc176;
+    background-color: #6096ba;
 }
 .title{
     /* font-family: 'Lato', sans-serif; */
    
-    color:#85887f;
+    color:#274c77;
     letter-spacing: 10px;
     font-size: 4em;
     display: flex;
     justify-content: center;
-    padding:5px;
+    /* padding:5px; */
 }
 h2{
    
-    color:#85887f;
+    color:#274c77;
     letter-spacing: 5px;
     font-size: 2em;
     display: flex;
     justify-content: center;
-    padding:5px;
+    /* padding:5px; */
+}
+.main-content{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 #myBookshelf{
-    background-color:#ffdc74;
-    height: 200px;
+    background-color:#e7ecef;
+    /* height: 200px; */
    
 }
 
@@ -62,7 +67,7 @@ h2{
 
 
 .card{
-    background-color:#d7dace;
+    background-color:#e7ecef;
     padding:5%;
     margin: 5px;
     border-radius: 10px;
@@ -71,11 +76,12 @@ h2{
 .html-results{
     display: grid;
     gap: 1em;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    /* display: inline-grid; */
     
 }
-.container{
-    background-color:#ffe9b3;
-    padding: 5%;
-    margin: 5px;
+.search-container{
+    /* background-color:#6096ba; */
+    background-color: #a3cef1;
+   
 }
