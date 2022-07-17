@@ -72,7 +72,7 @@ function showBook(image, title, author, description, link) {
                 <h5 class="card-title">${title}</h5>
                 <h6 class="card-author">by ${author}</h6>
                 <p class="card-text">${description}</p>
-                <a href="${link}" class="btn btn-primary">More info...</a>
+                <a href="${link}" class="btn">More info...</a>
                 <br>
                 <br>
                 <button onclick='addBookToList("${title}")'> Add to bookshelf </button>
@@ -94,5 +94,7 @@ searchResults.onclick = () => {
   saveBooksDisplay = saveBooks.shift();
   document.getElementById(
     "myBookshelf"
-  ).innerHTML += ` ${saveBooksDisplay} <br>`;
+  ).innerHTML += `-${saveBooksDisplay} <form action="/action_page.php">
+  <input type="checkbox" id="currently-reading" name="currently-reading" value="currently-reading"><label for="currently-reading"> Currently Reading</label><br> <input type="checkbox" id="have-read" name="have-read" value="have-read">
+  <label for="have-read"> I have read this book</label><br></form><br>`;
 };
