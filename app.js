@@ -66,7 +66,7 @@ function fetchAPI() {
 
 function showBook(image, title, author, description, link) {
   return `
-        <div class="card" style="width: 17rem;">
+        <div class="card">
             <img src="${image}" class="card-img" alt="book cover">
             <div class="card-body">
                 <h5 class="card-title">${title}</h5>
