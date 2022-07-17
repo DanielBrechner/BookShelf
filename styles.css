@@ -77,8 +77,8 @@ h2{
 .html-results{
     display: grid;
     gap: 1em;
-    grid-template-columns: 1fr 1fr;
-    /* display: inline-grid; */
+    /* grid-template-columns: 1fr 1fr; */
+    display: inline-grid;
     
 }
 .search-container{
@@ -86,3 +86,26 @@ h2{
     background-color: #a3cef1;
    
 }
+
+/* Media Queries*/
+
+@media screen and (min-width: 768px) {
+
+    .html-results{
+        display: grid;
+        gap: 1em;
+        grid-template-columns: 1fr 1fr;
+        /* display: inline-grid; */
+        
+    }
+    }
+
+ @media screen and (min-width: 1024px) {
+    .html-results{
+        display: grid;
+        gap: 1em;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        /* display: inline-grid; */
+        
+    }
+    }

@@ -91,5 +91,8 @@ function cutDescription(description) {
 let searchResults = document.getElementById("search-results");
 searchResults.onclick = () => {
   console.log("search button pressed");
-  document.getElementById("myBookshelf").innerHTML += saveBooks;
+  saveBooksDisplay = saveBooks.shift();
+  document.getElementById(
+    "myBookshelf"
+  ).innerHTML += ` ${saveBooksDisplay} <br>`;
 };
