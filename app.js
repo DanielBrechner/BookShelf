@@ -83,18 +83,28 @@ function showBook(image, title, author, description, link) {
 function cutDescription(description) {
   return description.slice(0, 100).concat("", "...");
 }
-// eventz
-// document.getElementById("search-results").addEventListener("click", () => {
-//   console.log("event clicked for search results!!");
-// });
 
 let searchResults = document.getElementById("search-results");
+
 searchResults.onclick = () => {
-  console.log("search button pressed");
   saveBooksDisplay = saveBooks.shift();
   document.getElementById(
     "myBookshelf"
-  ).innerHTML += `-${saveBooksDisplay} <form action="/action_page.php">
-  <input type="checkbox" id="currently-reading" name="currently-reading" value="currently-reading"><label for="currently-reading"> Currently Reading</label><br> <input type="checkbox" id="have-read" name="have-read" value="have-read">
-  <label for="have-read"> I have read this book</label><br></form><br>`;
+  ).innerHTML += `-${saveBooksDisplay} <form>
+  <input type="radio" id="currently-reading" name="checkbox-book" value="currently-reading"><label for="currently-reading"> Currently reading</label><br> <input type="radio" id="have-read" name="checkbox-book" value="have-read">
+  <label for="have-read"> I have read this book</label><br><button id="submit1">Submit</button><br></form><br>`;
+
+  document.querySelector("form").addEventListener("submit1", (e) => {
+    e.preventDefault();
+    addSavedBooks();
+
+    function addSavedBooks() {
+      const radioButtonBook = document.querySelector(
+        'input[name="checkbox-book"]:checked'
+      );
+      if (radioButtonBook) {
+        console.log(radioButtonBook);
+      }
+    }
+  });
 };
