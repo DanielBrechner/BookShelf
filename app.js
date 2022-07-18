@@ -103,7 +103,10 @@ searchResults.onclick = () => {
         'input[name="checkbox-book"]:checked'
       );
       if (radioButtonBook) {
-        console.log(radioButtonBook);
+        localStorage.setItem(
+          "radioButton",
+          JSON.stringify([...JSON.parse(localStorage.getItem("radioButton"))])
+        );
       }
     }
   });
