@@ -40,7 +40,7 @@ const btnSearch = document.querySelector("#btn-search");
 const inputSearch = document.querySelector("#input-search");
 const divResults = document.querySelector("#search-results");
 const saveBooks = [];
-
+const lsOutput = document.getElementById("lsOutput");
 btnSearch.addEventListener("click", fetchAPI);
 
 inputSearch.addEventListener("keyup", function (e) {
@@ -65,8 +65,12 @@ function addBookToList(title) {
   let bookItems = JSON.parse(localStorage.getItem("Book Name"));
   console.log(saveBooks);
 }
-
-document.getElementById("myBookshelf").innerHTML += saveBooks;
+for (let i = 0; i < localStorage.length; i++) {
+  const key = localStorage.key(i);
+  const value = localStorage.getItem(key);
+  // location.reload();
+  lsOutput.innerHTML += `${value}`;
+}
 
 function fetchAPI() {
   const searchPhrase = inputSearch.value;
