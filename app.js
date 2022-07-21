@@ -1,4 +1,40 @@
 "use-strict";
+// if (localStorage.getItem("name") === null) {
+//   document.write("need name");
+// } else {
+//   document.write("hello name");
+// }
+//local storage for name
+// const input = document.querySelector("#name");
+// const form = document.querySelector("form");
+// const submit = document.querySelector("#submitName");
+// const remove = document.querySelector("#clear");
+
+// var storage = localStorage;
+
+// form.addEventListener("submit", (e) => {
+//   e.preventDefault();
+// });
+
+// submit.addEventListener("click", () => {
+//   storage.setItem("name", input.value);
+//   updateNameTitle();
+// });
+
+// remove.addEventListener("click", () => {
+//   storage.removeItem("name");
+//   updateNameTitle();
+// });
+
+// function updateNameTitle() {
+//   const name = storage.getItem("name");
+
+//   const h1 = document.querySelector("#nameTitle");
+
+//   name
+//     ? (h1.textContent = `Welcome ${name}! Let's start tracking your books!`)
+//     : (h1.textContent = "");
+// }
 
 const btnSearch = document.querySelector("#btn-search");
 const inputSearch = document.querySelector("#input-search");
@@ -18,13 +54,19 @@ function addBookToList(title) {
   saveBooks.forEach((bookTitle) => {
     if (bookTitle === title) {
       isBookAdded = true;
+      console.log(title);
     }
   });
   if (!isBookAdded) {
     saveBooks.push(title);
   }
+
+  localStorage.setItem("Book name", JSON.stringify(saveBooks));
+  let bookItems = JSON.parse(localStorage.getItem("Book Name"));
   console.log(saveBooks);
 }
+
+document.getElementById("myBookshelf").innerHTML += saveBooks;
 
 function fetchAPI() {
   const searchPhrase = inputSearch.value;
@@ -35,12 +77,12 @@ function fetchAPI() {
   )
     .then((response) => response.json())
     .then((data) => data.items)
+
     .then((books) => {
       let resultHtml = ``;
 
       console.log(books);
       books.forEach((book) => {
-        console.log(book);
         const bookInfo = book.volumeInfo;
 
         // books info displayed on the search page
@@ -65,6 +107,7 @@ function fetchAPI() {
 }
 
 function showBook(image, title, author, description, link) {
+  //   if (addBookToList === undefined) { }
   return `
         <div class="card">
             <img src="${image}" class="card-img" alt="book cover">
@@ -75,7 +118,7 @@ function showBook(image, title, author, description, link) {
                 <a href="${link}" class="btn">More info...</a>
                 <br>
                 <br>
-                <button onclick='addBookToList("${title}")'> Add to bookshelf </button>
+                <button id="btn1" onclick='addBookToList("${title}")'> Add to bookshelf </button>
             </div>
         </div>`;
 }
@@ -84,30 +127,34 @@ function cutDescription(description) {
   return description.slice(0, 100).concat("", "...");
 }
 
-let searchResults = document.getElementById("search-results");
+// let searchResults = document.getElementById("search-results");
 
-searchResults.onclick = () => {
-  saveBooksDisplay = saveBooks.shift();
-  document.getElementById(
-    "myBookshelf"
-  ).innerHTML += `-${saveBooksDisplay} <form>
-  <input type="radio" id="currently-reading" name="checkbox-book" value="currently-reading"><label for="currently-reading"> Currently reading</label><br> <input type="radio" id="have-read" name="checkbox-book" value="have-read">
-  <label for="have-read"> I have read this book</label><br><button id="submit1">Submit</button><br></form><br>`;
+// searchResults.onclick = () => {
+//   saveBooksDisplay = saveBooks.shift();
 
-  document.querySelector("form").addEventListener("submit1", (e) => {
-    e.preventDefault();
-    addSavedBooks();
+// document.getElementById(
+//   "myBookshelf"
+// ).innerHTML += `-${saveBooksDisplay} <form>
+// <input type="radio" id="currently-reading" name="checkbox-book" value="currently-reading"><label for="currently-reading"> Currently reading</label><br> <input type="radio" id="have-read" name="checkbox-book" value="have-read">
+// <label for="have-read"> I have read this book</label><br><button id="submit">Submit</button><br></form><br>`;
 
-    function addSavedBooks() {
-      const radioButtonBook = document.querySelector(
-        'input[name="checkbox-book"]:checked'
-      );
-      if (radioButtonBook) {
-        localStorage.setItem(
-          "radioButton",
-          JSON.stringify([...JSON.parse(localStorage.getItem("radioButton"))])
-        );
-      }
-    }
-  });
-};
+//   document.querySelector("form").addEventListener("click", (e) => {
+//     e.preventDefault();
+//     console.log(e);
+//     addSavedBooks();
+
+//     function addSavedBooks() {
+//       //   let selectedItem = document.querySelectorAll("input:checked");
+//       const radioButtonBook = document.querySelector(
+//         'input[name="checkbox-book"]:checked'
+//       );
+
+//       if (radioButtonBook) {
+//         localStorage.setItem(
+//           "radioButton",
+//           JSON.stringify([...JSON.parse(localStorage.getItem("radioButton"))])
+//         );
+//       }
+//     }
+//   });
+// };
