@@ -39,8 +39,10 @@
 const btnSearch = document.querySelector("#btn-search");
 const inputSearch = document.querySelector("#input-search");
 const divResults = document.querySelector("#search-results");
-const saveBooks = [];
 const lsOutput = document.getElementById("lsOutput");
+const resultSet = null;
+let bookItems = JSON.parse(localStorage.getItem("Book name"));
+
 btnSearch.addEventListener("click", fetchAPI);
 
 inputSearch.addEventListener("keyup", function (e) {
@@ -51,24 +53,22 @@ inputSearch.addEventListener("keyup", function (e) {
 
 function addBookToList(title) {
   let isBookAdded = false;
-  saveBooks.forEach((bookTitle) => {
+  bookItems.forEach((bookTitle) => {
     if (bookTitle === title) {
       isBookAdded = true;
       console.log(title);
     }
   });
   if (!isBookAdded) {
-    saveBooks.push(title);
+    bookItems.push(title);
   }
 
-  localStorage.setItem("Book name", JSON.stringify(saveBooks));
-  let bookItems = JSON.parse(localStorage.getItem("Book Name"));
-  console.log(saveBooks);
+  localStorage.setItem("Book name", JSON.stringify(bookItems));
 }
+
 for (let i = 0; i < localStorage.length; i++) {
   const key = localStorage.key(i);
   const value = localStorage.getItem(key);
-  // location.reload();
   lsOutput.innerHTML += `${value}`;
 }
 
@@ -83,35 +83,31 @@ function fetchAPI() {
     .then((data) => data.items)
 
     .then((books) => {
+      resultSet = books;
       let resultHtml = ``;
 
       console.log(books);
       books.forEach((book) => {
         const bookInfo = book.volumeInfo;
 
-        // books info displayed on the search page
         const image = bookInfo.imageLinks
           ? bookInfo.imageLinks.smallThumbnail
           : "/";
         const title = bookInfo.title;
         const author = bookInfo.authors;
-        // const subtitle = bookInfo.subtitle ? bookInfo.subtitle : "";
         const description = bookInfo.description
           ? cutDescription(bookInfo.description)
           : "Description not found...";
         const link = bookInfo.infoLink;
 
-        // add a book card to the html markup
         resultHtml += showBook(image, title, author, description, link);
       });
 
-      // display created html markup
       divResults.innerHTML = `<div class="html-results">${resultHtml}</div>`;
     });
 }
 
 function showBook(image, title, author, description, link) {
-  //   if (addBookToList === undefined) { }
   return `
         <div class="card">
             <img src="${image}" class="card-img" alt="book cover">
@@ -119,7 +115,7 @@ function showBook(image, title, author, description, link) {
                 <h5 class="card-title">${title}</h5>
                 <h6 class="card-author">by ${author}</h6>
                 <p class="card-text">${description}</p>
-                <a href="${link}" class="btn">More info...</a>
+                <a href="${link}" class="btn" target="_blank">More info...</a>
                 <br>
                 <br>
                 <button id="btn1" onclick='addBookToList("${title}")'> Add to bookshelf </button>
@@ -134,11 +130,11 @@ function cutDescription(description) {
 // let searchResults = document.getElementById("search-results");
 
 // searchResults.onclick = () => {
-//   saveBooksDisplay = saveBooks.shift();
+//   bookItemsDisplay = bookItems.shift();
 
 // document.getElementById(
 //   "myBookshelf"
-// ).innerHTML += `-${saveBooksDisplay} <form>
+// ).innerHTML += `-${bookItemsDisplay} <form>
 // <input type="radio" id="currently-reading" name="checkbox-book" value="currently-reading"><label for="currently-reading"> Currently reading</label><br> <input type="radio" id="have-read" name="checkbox-book" value="have-read">
 // <label for="have-read"> I have read this book</label><br><button id="submit">Submit</button><br></form><br>`;
 
