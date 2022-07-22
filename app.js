@@ -50,9 +50,10 @@ console.log(bookItems);
 //bookshelf events
 
 clearBookshelf.addEventListener("click", function (e) {
-  if (localStorage.length > 0) {
-    console.log("length is greater than 0");
-    localStorage.removeItem("Book name", JSON.stringify(bookItems));
+  if (bookItems.length > 0) {
+    bookItems = [];
+    localStorage.removeItem("Book name");
+    updateBookshelf();
   }
 });
 
@@ -167,7 +168,11 @@ function addBookToList(id) {
 }
 
 function removeBook(id) {
-  console.log(id);
+  const thisBook = bookItems.findIndex((book) => book.id === id);
+  console.log(thisBook);
+  bookItems.splice(thisBook, 1);
+  localStorage.setItem("Book name", JSON.stringify(bookItems));
+  updateBookshelf();
 }
 
 function cutDescription(description) {
