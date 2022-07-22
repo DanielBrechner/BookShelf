@@ -39,9 +39,25 @@
 const btnSearch = document.querySelector("#btn-search");
 const inputSearch = document.querySelector("#input-search");
 const divResults = document.querySelector("#search-results");
+let resultSet = null;
 const lsOutput = document.getElementById("lsOutput");
-const resultSet = null;
-let bookItems = JSON.parse(localStorage.getItem("Book name"));
+const updateBookshelf = document.getElementById("updateBookshelf");
+const removeBookshelf = document.getElementById("removeBookshelf");
+
+let bookItems = JSON.parse(localStorage.getItem("Book name")) || [];
+console.log(bookItems);
+
+//bookshelf events
+updateBookshelf.addEventListener("click", function (e) {
+  location.reload();
+});
+
+removeBookshelf.addEventListener("click", function (e) {
+  if (localStorage.length > 0) {
+    console.log("length is greater than 0");
+    localStorage.removeItem("Book name", JSON.stringify(bookItems));
+  }
+});
 
 btnSearch.addEventListener("click", fetchAPI);
 
@@ -51,18 +67,23 @@ inputSearch.addEventListener("keyup", function (e) {
   }
 });
 
-function addBookToList(title) {
+function addBookToList(id) {
   let isBookAdded = false;
-  bookItems.forEach((bookTitle) => {
-    if (bookTitle === title) {
-      isBookAdded = true;
-      console.log(title);
-    }
-  });
+  const thisBook = resultSet.find((book) => book.id === id);
+
+  if (bookItems.length > 0) {
+    bookItems.forEach((book) => {
+      if (book.id == thisBook.id) {
+        isBookAdded = true;
+      }
+    });
+  }
+  console.log(isBookAdded);
   if (!isBookAdded) {
-    bookItems.push(title);
+    bookItems.push(thisBook);
   }
 
+  console.log(bookItems);
   localStorage.setItem("Book name", JSON.stringify(bookItems));
 }
 
@@ -86,10 +107,12 @@ function fetchAPI() {
       resultSet = books;
       let resultHtml = ``;
 
+      resultSet = books;
       console.log(books);
       books.forEach((book) => {
         const bookInfo = book.volumeInfo;
-
+        const id = book.id;
+        // books info displayed on the search page
         const image = bookInfo.imageLinks
           ? bookInfo.imageLinks.smallThumbnail
           : "/";
@@ -100,14 +123,14 @@ function fetchAPI() {
           : "Description not found...";
         const link = bookInfo.infoLink;
 
-        resultHtml += showBook(image, title, author, description, link);
+        resultHtml += showBook(id, image, title, author, description, link);
       });
 
       divResults.innerHTML = `<div class="html-results">${resultHtml}</div>`;
     });
 }
 
-function showBook(image, title, author, description, link) {
+function showBook(id, image, title, author, description, link) {
   return `
         <div class="card">
             <img src="${image}" class="card-img" alt="book cover">
@@ -118,7 +141,7 @@ function showBook(image, title, author, description, link) {
                 <a href="${link}" class="btn" target="_blank">More info...</a>
                 <br>
                 <br>
-                <button id="btn1" onclick='addBookToList("${title}")'> Add to bookshelf </button>
+                <button id="btn1" onclick='addBookToList("${id}")'> Add to bookshelf </button>
             </div>
         </div>`;
 }
