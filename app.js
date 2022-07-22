@@ -39,26 +39,24 @@
 const btnSearch = document.querySelector("#btn-search");
 const inputSearch = document.querySelector("#input-search");
 const divResults = document.querySelector("#search-results");
+const savedBooks = document.querySelector("#saved-books");
 let resultSet = null;
-const lsOutput = document.getElementById("lsOutput");
-const updateBookshelf = document.getElementById("updateBookshelf");
-const removeBookshelf = document.getElementById("removeBookshelf");
+
+const clearBookshelf = document.getElementById("clear-bookshelf");
 
 let bookItems = JSON.parse(localStorage.getItem("Book name")) || [];
 console.log(bookItems);
 
 //bookshelf events
-updateBookshelf.addEventListener("click", function (e) {
-  location.reload();
-});
 
-removeBookshelf.addEventListener("click", function (e) {
+clearBookshelf.addEventListener("click", function (e) {
   if (localStorage.length > 0) {
     console.log("length is greater than 0");
     localStorage.removeItem("Book name", JSON.stringify(bookItems));
   }
 });
 
+//fetch events
 btnSearch.addEventListener("click", fetchAPI);
 
 inputSearch.addEventListener("keyup", function (e) {
@@ -66,32 +64,6 @@ inputSearch.addEventListener("keyup", function (e) {
     fetchAPI();
   }
 });
-
-function addBookToList(id) {
-  let isBookAdded = false;
-  const thisBook = resultSet.find((book) => book.id === id);
-
-  if (bookItems.length > 0) {
-    bookItems.forEach((book) => {
-      if (book.id == thisBook.id) {
-        isBookAdded = true;
-      }
-    });
-  }
-  console.log(isBookAdded);
-  if (!isBookAdded) {
-    bookItems.push(thisBook);
-  }
-
-  console.log(bookItems);
-  localStorage.setItem("Book name", JSON.stringify(bookItems));
-}
-
-for (let i = 0; i < localStorage.length; i++) {
-  const key = localStorage.key(i);
-  const value = localStorage.getItem(key);
-  lsOutput.innerHTML += `${value}`;
-}
 
 function fetchAPI() {
   const searchPhrase = inputSearch.value;
@@ -107,7 +79,7 @@ function fetchAPI() {
       resultSet = books;
       let resultHtml = ``;
 
-      resultSet = books;
+      // resultSet = books;
       console.log(books);
       books.forEach((book) => {
         const bookInfo = book.volumeInfo;
@@ -145,11 +117,64 @@ function showBook(id, image, title, author, description, link) {
             </div>
         </div>`;
 }
+function updateBookshelf() {
+  let resultHtml = ``;
+
+  bookItems.forEach((book) => {
+    const bookInfo = book.volumeInfo;
+    const id = book.id;
+    // books info displayed on the search page
+    const image = bookInfo.imageLinks
+      ? bookInfo.imageLinks.smallThumbnail
+      : "/";
+    const title = bookInfo.title;
+    const author = bookInfo.authors;
+
+    resultHtml += showBookInBookshelf(id, image, title, author);
+  });
+
+  savedBooks.innerHTML = `<div class="html-results">${resultHtml}</div>`;
+}
+
+function showBookInBookshelf(id, image, title, author) {
+  return `<div class="card-bookshelf">
+      <img src="${image}" class="card-img" alt="book cover">
+      <h5 class="card-title">${title}</h5>
+      <h6 class="card-author">by ${author}</h6>
+      <button onclick='removeBook("${id}")'>Remove Book</button>
+      </div>`;
+}
+
+function addBookToList(id) {
+  let isBookAdded = false;
+  const thisBook = resultSet.find((book) => book.id === id);
+
+  if (bookItems.length > 0) {
+    bookItems.forEach((book) => {
+      if (book.id == thisBook.id) {
+        isBookAdded = true;
+      }
+    });
+  }
+  console.log(isBookAdded);
+  if (!isBookAdded) {
+    bookItems.push(thisBook);
+  }
+
+  console.log(bookItems);
+  localStorage.setItem("Book name", JSON.stringify(bookItems));
+  updateBookshelf();
+}
+
+function removeBook(id) {
+  console.log(id);
+}
 
 function cutDescription(description) {
   return description.slice(0, 100).concat("", "...");
 }
 
+updateBookshelf();
 // let searchResults = document.getElementById("search-results");
 
 // searchResults.onclick = () => {
