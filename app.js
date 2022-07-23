@@ -1,40 +1,4 @@
 "use-strict";
-// if (localStorage.getItem("name") === null) {
-//   document.write("need name");
-// } else {
-//   document.write("hello name");
-// }
-//local storage for name
-// const input = document.querySelector("#name");
-// const form = document.querySelector("form");
-// const submit = document.querySelector("#submitName");
-// const remove = document.querySelector("#clear");
-
-// var storage = localStorage;
-
-// form.addEventListener("submit", (e) => {
-//   e.preventDefault();
-// });
-
-// submit.addEventListener("click", () => {
-//   storage.setItem("name", input.value);
-//   updateNameTitle();
-// });
-
-// remove.addEventListener("click", () => {
-//   storage.removeItem("name");
-//   updateNameTitle();
-// });
-
-// function updateNameTitle() {
-//   const name = storage.getItem("name");
-
-//   const h1 = document.querySelector("#nameTitle");
-
-//   name
-//     ? (h1.textContent = `Welcome ${name}! Let's start tracking your books!`)
-//     : (h1.textContent = "");
-// }
 
 const btnSearch = document.querySelector("#btn-search");
 const inputSearch = document.querySelector("#input-search");
@@ -47,8 +11,6 @@ const clearBookshelf = document.getElementById("clear-bookshelf");
 let bookItems = JSON.parse(localStorage.getItem("Book name")) || [];
 console.log(bookItems);
 
-//bookshelf events
-
 clearBookshelf.addEventListener("click", function (e) {
   if (bookItems.length > 0) {
     bookItems = [];
@@ -57,7 +19,6 @@ clearBookshelf.addEventListener("click", function (e) {
   }
 });
 
-//fetch events
 btnSearch.addEventListener("click", fetchAPI);
 
 inputSearch.addEventListener("keyup", function (e) {
@@ -79,13 +40,10 @@ function fetchAPI() {
     .then((books) => {
       resultSet = books;
       let resultHtml = ``;
-
-      // resultSet = books;
       console.log(books);
       books.forEach((book) => {
         const bookInfo = book.volumeInfo;
         const id = book.id;
-        // books info displayed on the search page
         const image = bookInfo.imageLinks
           ? bookInfo.imageLinks.smallThumbnail
           : "/";
@@ -124,7 +82,6 @@ function updateBookshelf() {
   bookItems.forEach((book) => {
     const bookInfo = book.volumeInfo;
     const id = book.id;
-    // books info displayed on the search page
     const image = bookInfo.imageLinks
       ? bookInfo.imageLinks.smallThumbnail
       : "/";
@@ -180,34 +137,3 @@ function cutDescription(description) {
 }
 
 updateBookshelf();
-// let searchResults = document.getElementById("search-results");
-
-// searchResults.onclick = () => {
-//   bookItemsDisplay = bookItems.shift();
-
-// document.getElementById(
-//   "myBookshelf"
-// ).innerHTML += `-${bookItemsDisplay} <form>
-// <input type="radio" id="currently-reading" name="checkbox-book" value="currently-reading"><label for="currently-reading"> Currently reading</label><br> <input type="radio" id="have-read" name="checkbox-book" value="have-read">
-// <label for="have-read"> I have read this book</label><br><button id="submit">Submit</button><br></form><br>`;
-
-//   document.querySelector("form").addEventListener("click", (e) => {
-//     e.preventDefault();
-//     console.log(e);
-//     addSavedBooks();
-
-//     function addSavedBooks() {
-//       //   let selectedItem = document.querySelectorAll("input:checked");
-//       const radioButtonBook = document.querySelector(
-//         'input[name="checkbox-book"]:checked'
-//       );
-
-//       if (radioButtonBook) {
-//         localStorage.setItem(
-//           "radioButton",
-//           JSON.stringify([...JSON.parse(localStorage.getItem("radioButton"))])
-//         );
-//       }
-//     }
-//   });
-// };
