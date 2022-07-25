@@ -95,7 +95,7 @@ function updateBookshelf() {
 }
 
 function showBookInBookshelf(id, image, title, author) {
-  return `<div class="card-bookshelf">
+  return `<div class="card">
       <img src="${image}" class="card-img" alt="book cover">
       <h5 class="card-title">${title}</h5>
       <h6 class="card-author">by ${author}</h6>
