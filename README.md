@@ -1,5 +1,6 @@
 # BookShelf
 https://danielbrechner.github.io/BookShelf/
+
 This website helps users keep track of a personal bookshelf so they can manage books they are reading.  This is my final project for Code Louisville's front end web dev 2 class. The book search feature uses the Google Books API, and by clicking on the "add to bookshelf" button the book is saved to local storage.  This site is responsive on different devices through the use of media queries.  
 
 The three features used are:
