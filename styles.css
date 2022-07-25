@@ -7,23 +7,18 @@ html,
 body {
  
     height: 100%;
-    /* margin: 5px; */
-    font-family: 'Lora', serif;
-  
     background-color: white;
   
 
 }
 
 .title{
-    /* font-family: 'Lato', sans-serif; */
-   
     color:#274c77;
     letter-spacing: 10px;
-    font-size: 4em;
+    /* font-size: 4em; */
     display: flex;
     justify-content: center;
-    /* padding:5px; */
+    font-size: 50px;
 }
 h2{
    
@@ -32,7 +27,6 @@ h2{
     font-size: 2em;
     display: flex;
     justify-content: center;
-    /* padding:5px; */
 }
 
 .container {
@@ -42,7 +36,6 @@ h2{
     padding-top: 50px;
     background-color: #e1e3ea;
  
-    font-family: sans-serif;
   }
 
 .main-content{
@@ -51,8 +44,6 @@ h2{
 }
 #my-bookshelf{
     background-color:#e7ecef;
-    /* height: 200px; */
-   
 }
 
 #input-group{
@@ -64,16 +55,8 @@ h2{
 .form{
     padding: 5px;
     margin: 5px;
-    font-family: 'Lora', serif;
     border-radius: 5px;  
 }
-.btn{
-    padding: 5px;
-    margin: 5px;
-    font-family: 'Lora', serif;
-    border-radius: 5px;  
-}
-
 
 .card{
     background-color:#e7ecef;
@@ -90,12 +73,46 @@ h2{
     display: inline-grid;
     
 }
+
 .search-container{
-    /* background-color:#6096ba; */
     background-color: #a3cef1;
-   
 }
 
+#clear-bookshelf{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 5px; */
+    margin: 5px;
+}
+button{
+  
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    /* font-size: 14px; */
+    /* line-height: 1; */
+    border-radius: 500px;
+    transition-property: background-color,border-color,color,box-shadow,filter;
+    transition-duration: .3s;
+    border: 1px solid transparent;
+    letter-spacing: 2px;
+    min-width: 160px;
+    text-transform: uppercase;
+    white-space: normal;
+    font-weight: 700;
+    text-align: center;
+    padding: 17px 48px;
+    color: #fff;
+    background-color: #1ED760;
+    /* height: 48px; */
+  
+
+
+}
+#clear-bookshelf{
+    background-color: crimson;
+}
 /* Media Queries*/
 
 @media screen and (min-width: 768px) {
