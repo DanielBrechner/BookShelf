@@ -10,6 +10,7 @@ body {
     height: 100%;
     background-color:#274c77;
     /* background-color: #403d39; */
+   
 }
 
 .title{
@@ -28,9 +29,12 @@ h2{
     font-size: 2em;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
-
+.my-books{
+    height: 125px;
+}
 
 #my-bookshelf{
     background-color:#e7ecef;
@@ -68,6 +72,20 @@ input{
    
    
 }
+.card-img{
+padding-left: 60px;
+}
+.card-title{
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.card-author{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .html-results{
     display: grid;
     gap: 1em;
@@ -75,14 +93,16 @@ input{
     display: inline-grid;
     
 }
-
+.find-books{
+    height: 125px;
+}
 .search-container{
     background-color: #e7ecef;
      border: 5px solid #274c77;
      border-radius: 10px;
 }
 .clear-bookshelf-btn{
-   
+ 
     display: flex;
     justify-content: center;
     align-items: center; 
@@ -112,8 +132,8 @@ button{
     transition: all .2s ease-out;
     width: fit-content;
     }
-    
-}
+
+
 #clear-bookshelf{
     background-color: crimson;
 }
